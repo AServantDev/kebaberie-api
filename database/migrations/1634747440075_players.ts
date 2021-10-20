@@ -13,10 +13,8 @@ export default class Players extends BaseSchema {
       table.string('smash_main')
       table.string('mh_main')
       table.string('description')
-      table.boolean('has_mh')
-      table.boolean('has_mash')
       table.string('avatar')
-
+      table.string('games')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

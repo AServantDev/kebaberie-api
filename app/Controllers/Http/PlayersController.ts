@@ -14,17 +14,16 @@ export default class PlayersController {
     public async store(ctx: HttpContextContract) {
         const storePlayersSchema = schema.create({
             name: schema.string({}, [rules.required()]),
-            twitch: schema.string(),
-            twitter: schema.string(),
+            twitch: schema.string.optional(),
+            twitter: schema.string.optional(),
             title: schema.string({},[rules.required()]),
-            smashMain: schema.string(),
-            mhMain: schema.string(),
+            smashMain: schema.string.optional(),
+            mhMain: schema.string.optional(),
             description: schema.string({}, [rules.required()]),
-            hasSmash: schema.boolean([rules.required()]),
-            hasMh: schema.boolean([rules.required()]),
-            avatar: schema.string()
+            avatar: schema.string.optional(),
+            games: schema.array().members(schema.string())
         })
-        const {name, twitch, twitter, title, smashMain, mhMain, description, hasSmash, hasMh,avatar} = await ctx.request.validate({schema: storePlayersSchema})
+        const {name, twitch, twitter, title, smashMain, mhMain, description,avatar,games} = await ctx.request.validate({schema: storePlayersSchema})
 
         const player = await Player.create({
             name,
@@ -34,9 +33,8 @@ export default class PlayersController {
             smashMain,
             mhMain,
             description,
-            hasSmash,
-            hasMh,
-            avatar
+            avatar,
+            games
         })
         return player
     }

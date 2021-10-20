@@ -1,4 +1,4 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
+import { afterFetch, BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm';
 
 export default class Player extends BaseModel {
 
@@ -27,12 +27,11 @@ export default class Player extends BaseModel {
     public description: string
 
     @column()
-    public hasSmash: boolean
-    
-    @column()
-    public hasMh: boolean
+    public avatar?: string
 
     @column()
-    public avatar?: string
+    public games: string[]
+
+  
     
 }
